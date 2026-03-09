@@ -366,10 +366,6 @@
 
   <div class="folder-bar" id="folderBar"></div>
 
-  <div style="padding: 0 14px 10px;">
-    <button id="addFolderBtn">+ Add Folder</button>
-  </div>
-
   <section class="section">
     <h2>Character List</h2>
     <div id="characterList"></div>
@@ -389,8 +385,7 @@
   </nav>
 
   <script>
-    // ── Your existing JavaScript remains almost unchanged ──
-    // Only small cleanup & safer event delegation added
+
 
     const list = document.getElementById("characterList");
     const searchInput = document.getElementById("searchInput");
@@ -521,24 +516,6 @@
       savedFolders.forEach(f => folders.add(f));
       characters.forEach(c => { if (c.folder?.trim()) folders.add(c.folder.trim()); });
       return [...folders];
-    }
-
-    function buildFolderBar() {
-      folderBar.innerHTML = "";
-      getFolders().forEach(name => {
-        const btn = document.createElement("div");
-        btn.className = "folder";
-        btn.textContent = name;
-        if (name === activeFolder) btn.classList.add("active");
-
-        btn.onclick = () => {
-          activeFolder = name;
-          buildFolderBar();
-          applyFilters();
-        };
-
-        folderBar.appendChild(btn);
-      });
     }
 
     function applyFilters() {
